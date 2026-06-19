@@ -887,6 +887,7 @@ export default function Home() {
                 onClick={toggleSoundMute}
                 className="p-2 border-2 border-black rounded shadow-[2px_2px_0px_rgba(0,0,0,1)] bg-slate-100 hover:bg-slate-200 active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all"
                 title={isMuted ? "Unmute Retro Synth Sounds" : "Mute Sounds"}
+                aria-label={isMuted ? "Unmute Retro Synth Sounds" : "Mute Sounds"}
               >
                 {isMuted ? <VolumeX className="w-4 h-4 text-slate-600" /> : <Volume2 className="w-4 h-4 text-emerald-600 animate-bounce" />}
               </button>
@@ -898,6 +899,7 @@ export default function Home() {
                   ${crtActive ? 'bg-emerald-100' : 'bg-slate-100'}
                 `}
                 title="Toggle CRT Screen Glow Effect"
+                aria-label="Toggle CRT Screen Glow Effect"
               >
                 <Tv className={`w-4 h-4 ${crtActive ? 'text-emerald-700 font-bold' : 'text-slate-600'}`} />
               </button>
@@ -1000,7 +1002,9 @@ export default function Home() {
                   <div className="border-4 border-black p-5 bg-slate-900 rounded-lg text-white shadow-[6px_6px_0px_rgba(0,0,0,1)] flex gap-4 items-start relative overflow-hidden">
                     <div className="absolute inset-0 scanlines opacity-[0.03] pointer-events-none" />
                     
-                    {renderCharacterAvatar('eco', 'neutral')}
+                    <div role="img" aria-label="Eco-Chan operations guide avatar">
+                      {renderCharacterAvatar('eco', 'neutral')}
+                    </div>
                     
                     <div>
                       <div className="font-mono text-[9px] text-yellow-400 font-bold tracking-widest uppercase">OPERATIONS BRIEF</div>
@@ -1123,7 +1127,9 @@ export default function Home() {
                     <div>
                       {/* Interactive Avatar Container */}
                       <div className="flex justify-center mb-4 relative p-3 bg-slate-50 rounded border-2 border-black">
-                        {renderCharacterAvatar(char.id, charExpressions[char.id])}
+                        <div role="img" aria-label={`${char.name} profile avatar displaying ${charExpressions[char.id]} expression`}>
+                          {renderCharacterAvatar(char.id, charExpressions[char.id])}
+                        </div>
                         
                         <div className="absolute top-2 right-2 bg-black text-yellow-400 border border-black text-[7px] font-mono font-bold px-1 py-0.5 rounded uppercase">
                           {charExpressions[char.id]}
@@ -1269,6 +1275,7 @@ export default function Home() {
                           max="100"
                           value={calSolar}
                           onChange={(e) => { sounds.hover(); setCalSolar(Number(e.target.value)); }}
+                          aria-label="Solar grid infrastructure power ratio calibration slider"
                           className="w-full accent-amber-400 cursor-pointer h-2 bg-slate-800 border border-slate-700 rounded"
                         />
                       </div>
@@ -1285,6 +1292,7 @@ export default function Home() {
                           max="100"
                           value={calWind}
                           onChange={(e) => { sounds.hover(); setCalWind(Number(e.target.value)); }}
+                          aria-label="Wind turbines deployment ratio calibration slider"
                           className="w-full accent-cyan-400 cursor-pointer h-2 bg-slate-800 border border-slate-700 rounded"
                         />
                       </div>
@@ -1301,6 +1309,7 @@ export default function Home() {
                           max="100"
                           value={calRecycle}
                           onChange={(e) => { sounds.hover(); setCalRecycle(Number(e.target.value)); }}
+                          aria-label="Organic compost and recycling diversion rate calibration slider"
                           className="w-full accent-emerald-400 cursor-pointer h-2 bg-slate-800 border border-slate-700 rounded"
                         />
                       </div>
@@ -1317,6 +1326,7 @@ export default function Home() {
                           max="100"
                           value={calForest}
                           onChange={(e) => { sounds.hover(); setCalForest(Number(e.target.value)); }}
+                          aria-label="Biological forest sinks canopy recovery ratio calibration slider"
                           className="w-full accent-green-400 cursor-pointer h-2 bg-slate-800 border border-slate-700 rounded"
                         />
                       </div>
@@ -1333,6 +1343,7 @@ export default function Home() {
                           max="100"
                           value={calNuclear}
                           onChange={(e) => { sounds.hover(); setCalNuclear(Number(e.target.value)); }}
+                          aria-label="Base-load atomic power capacity ratio calibration slider"
                           className="w-full accent-purple-400 cursor-pointer h-2 bg-slate-800 border border-slate-700 rounded"
                         />
                       </div>
@@ -1349,6 +1360,7 @@ export default function Home() {
                           max="100"
                           value={calHydrogen}
                           onChange={(e) => { sounds.hover(); setCalHydrogen(Number(e.target.value)); }}
+                          aria-label="Green hydrogen cells fuel usage ratio calibration slider"
                           className="w-full accent-blue-400 cursor-pointer h-2 bg-slate-800 border border-slate-700 rounded"
                         />
                       </div>
@@ -1388,14 +1400,18 @@ export default function Home() {
                     {/* Interactive react character faces */}
                     <div className="mt-6 flex items-center justify-around p-4 bg-slate-50 rounded border-2 border-black relative">
                       <div className="text-center">
-                        {renderCharacterAvatar('eco', stabilityIndex >= 60 ? 'happy' : stabilityIndex >= 35 ? 'neutral' : 'concerned')}
+                        <div role="img" aria-label={`Eco-Chan react avatar displaying ${stabilityIndex >= 60 ? 'happy' : stabilityIndex >= 35 ? 'neutral' : 'concerned'} expression`}>
+                          {renderCharacterAvatar('eco', stabilityIndex >= 60 ? 'happy' : stabilityIndex >= 35 ? 'neutral' : 'concerned')}
+                        </div>
                         <div className="font-mono text-[9px] font-bold mt-1 uppercase text-slate-500">Eco-Chan</div>
                       </div>
 
                       <div className="font-mono text-sm font-black text-slate-400">vs</div>
 
                       <div className="text-center">
-                        {renderCharacterAvatar('daemon', stabilityIndex >= 60 ? 'concerned' : 'evil')}
+                        <div role="img" aria-label={`Carbon-Daemon react avatar displaying ${stabilityIndex >= 60 ? 'concerned' : 'evil'} expression`}>
+                          {renderCharacterAvatar('daemon', stabilityIndex >= 60 ? 'concerned' : 'evil')}
+                        </div>
                         <div className="font-mono text-[9px] font-bold mt-1 uppercase text-slate-500">Carbon-Daemon</div>
                       </div>
                     </div>
@@ -1443,10 +1459,12 @@ export default function Home() {
                       </div>
                       
                       <div className="flex items-center gap-3 mb-4">
-                        {renderCharacterAvatar(
-                          scrollyDialogues[scrollSection].character,
-                          scrollyDialogues[scrollSection].expression
-                        )}
+                        <div role="img" aria-label={`${scrollyDialogues[scrollSection].speaker} briefing avatar displaying ${scrollyDialogues[scrollSection].expression} expression`}>
+                          {renderCharacterAvatar(
+                            scrollyDialogues[scrollSection].character,
+                            scrollyDialogues[scrollSection].expression
+                          )}
+                        </div>
                         <div>
                           <div className="font-mono text-[9px] text-slate-500 uppercase tracking-widest">Speaker:</div>
                           <h4 className="font-mono text-sm font-black text-white">{scrollyDialogues[scrollSection].speaker}</h4>
@@ -1600,6 +1618,8 @@ export default function Home() {
               <button
                 onClick={toggleSoundMute}
                 className="p-2 border-2 border-black rounded shadow-[2px_2px_0px_rgba(0,0,0,1)] bg-slate-100 hover:bg-slate-200 active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all"
+                title={isMuted ? "Unmute Retro Synth Sounds" : "Mute Sounds"}
+                aria-label={isMuted ? "Unmute Retro Synth Sounds" : "Mute Sounds"}
               >
                 {isMuted ? <VolumeX className="w-4 h-4 text-slate-600" /> : <Volume2 className="w-4 h-4 text-emerald-600 animate-bounce" />}
               </button>
@@ -1610,6 +1630,8 @@ export default function Home() {
                 className={`p-2 border-2 border-black rounded shadow-[2px_2px_0px_rgba(0,0,0,1)] hover:bg-slate-200 active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all
                   ${crtActive ? 'bg-emerald-100' : 'bg-slate-100'}
                 `}
+                title="Toggle CRT Screen Glow Effect"
+                aria-label="Toggle CRT Screen Glow Effect"
               >
                 <Tv className={`w-4 h-4 ${crtActive ? 'text-emerald-700' : 'text-slate-600'}`} />
               </button>

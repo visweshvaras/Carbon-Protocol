@@ -165,7 +165,9 @@ export default function VisualNovelBox({ questions, onComplete }: VisualNovelBox
       <div className="flex flex-col md:flex-row gap-6 items-start bg-slate-900 border-4 border-black p-5 rounded-lg shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] text-white">
         
         <div className="flex flex-col items-center gap-2 self-center md:self-start">
-          {renderAvatar(currentQuestion.expression)}
+          <div role="img" aria-label={`${currentQuestion.speaker} character avatar, displaying ${currentQuestion.expression} expression`}>
+            {renderAvatar(currentQuestion.expression)}
+          </div>
           <span className="font-mono text-xs font-bold bg-emerald-600 text-white px-3 py-1 border-2 border-black rounded shadow-[2px_2px_0px_rgba(0,0,0,1)] uppercase">
             {currentQuestion.speaker}
           </span>

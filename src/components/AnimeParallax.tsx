@@ -174,6 +174,8 @@ export default function AnimeParallax({ progress }: AnimeParallaxProps) {
       <svg
         viewBox="0 0 800 600"
         className="w-full h-full select-none"
+        role="img"
+        aria-label="Interactive visual novel scrollytelling parallax animation depicting carbon scopes"
       >
         <defs>
           <linearGradient id="daemonSmokeGrad" x1="0" y1="0" x2="0" y2="1">

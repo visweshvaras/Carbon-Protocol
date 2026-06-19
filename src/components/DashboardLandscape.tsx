@@ -72,6 +72,8 @@ export default function DashboardLandscape({
         viewBox="0 0 800 400"
         className="w-full h-full transition-all duration-1000 ease-in-out"
         style={{ filter: landscapeFilter }}
+        role="img"
+        aria-label={`Dynamic landscape environment depicting ecosystem health based on carbon score of ${score}`}
       >
         <defs>
           {/* Gradients */}

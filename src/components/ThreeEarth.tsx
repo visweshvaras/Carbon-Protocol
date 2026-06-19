@@ -241,7 +241,7 @@ export default function ThreeEarth() {
 
   return (
     <div ref={containerRef} className="w-full h-full relative select-none bg-[#030712]">
-      <canvas ref={canvasRef} className="w-full h-full block" />
+      <canvas ref={canvasRef} className="w-full h-full block" role="img" aria-label="3D dynamic globe illustrating real-time carbon atmospheric simulation" />
       
       {/* Tactical UI indicators */}
       <div className="absolute inset-0 border border-emerald-500/20 pointer-events-none flex items-center justify-center m-6 rounded-lg">
