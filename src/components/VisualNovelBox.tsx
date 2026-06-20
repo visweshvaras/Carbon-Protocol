@@ -206,7 +206,7 @@ export default function VisualNovelBox({ questions, onComplete }: VisualNovelBox
               disabled={!isTypingDone}
               onMouseEnter={() => sounds.hover()}
               onClick={() => handleOptionClick(idx)}
-              className={`text-left p-4 border-4 border-black rounded-lg font-mono font-bold text-sm transition-all duration-150 flex items-center gap-3 relative
+              className={`text-left p-4 border-4 border-black rounded-lg font-mono font-bold text-sm transition-all duration-150 flex items-center gap-3 relative focus:outline-none focus-visible:ring-4 focus-visible:ring-amber-400
                 ${!isTypingDone ? 'opacity-40 cursor-not-allowed' : 'cursor-pointer'}
                 ${isSelected 
                   ? 'bg-amber-400 text-black translate-x-1 translate-y-1 shadow-none' 
@@ -228,7 +228,7 @@ export default function VisualNovelBox({ questions, onComplete }: VisualNovelBox
           onClick={handleNext}
           disabled={selectedOptionIdx === null}
           onMouseEnter={() => selectedOptionIdx !== null && sounds.hover()}
-          className={`px-8 py-3.5 font-mono font-bold text-base border-4 border-black rounded-lg transition-all duration-150 flex items-center gap-2
+          className={`px-8 py-3.5 font-mono font-bold text-base border-4 border-black rounded-lg transition-all duration-150 flex items-center gap-2 focus:outline-none focus-visible:ring-4 focus-visible:ring-emerald-400
             ${selectedOptionIdx === null
               ? 'bg-zinc-600 text-zinc-400 cursor-not-allowed opacity-50 shadow-none'
               : 'bg-emerald-500 text-black hover:bg-emerald-400 shadow-[4px_4px_0px_rgba(0,0,0,1)] active:translate-x-1 active:translate-y-1 active:shadow-none'

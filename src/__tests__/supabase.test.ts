@@ -87,4 +87,31 @@ describe('supabase mockDb unit tests', () => {
   test('should return empty actions array if user has no actions', () => {
     expect(mockDb.getActions('non-existent-user')).toEqual([]);
   });
+
+  test('should sanitize user profile and actions input', () => {
+    const maliciousUser: UserState = {
+      id: '<script>alert("xss")</script>',
+      name: '<b>Malicious</b>',
+      score: 50,
+      q1_answer: '<img src=x onerror=alert(1)>',
+      created_at: new Date().toISOString()
+    };
+    mockDb.setUser(maliciousUser);
+    
+    const retrievedUser = mockDb.getUser();
+    expect(retrievedUser?.id).toBe('&lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;');
+    expect(retrievedUser?.name).toBe('&lt;b&gt;Malicious&lt;/b&gt;');
+    expect(retrievedUser?.q1_answer).toBe('&lt;img src=x onerror=alert(1)&gt;');
+
+    const action = mockDb.addAction({
+      user_id: '<script>alert("xss")</script>',
+      action_type: '<b>ATTACK</b>',
+      score_change: -10,
+      description: '"><iframe src="javascript:alert(1)">'
+    });
+
+    expect(action.user_id).toBe('&lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;');
+    expect(action.action_type).toBe('&lt;b&gt;ATTACK&lt;/b&gt;');
+    expect(action.description).toBe('&quot;&gt;&lt;iframe src=&quot;javascript:alert(1)&quot;&gt;');
+  });
 });

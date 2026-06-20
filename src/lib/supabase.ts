@@ -19,6 +19,19 @@ export interface UserAction {
   created_at: string;
 }
 
+const sanitizeString = (str: string): string => {
+  return str.replace(/[&<>"']/g, (match) => {
+    const map: Record<string, string> = {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#x27;'
+    };
+    return map[match];
+  });
+};
+
 const MOCK_USER_KEY = 'anime_carbon_user';
 const MOCK_ACTIONS_KEY = 'anime_carbon_actions';
 
@@ -31,7 +44,16 @@ export const mockDb = {
 
   setUser: (user: UserState): void => {
     if (typeof window === 'undefined') return;
-    localStorage.setItem(MOCK_USER_KEY, JSON.stringify(user));
+    const sanitizedUser: UserState = {
+      ...user,
+      id: sanitizeString(user.id),
+      name: sanitizeString(user.name),
+      q1_answer: user.q1_answer ? sanitizeString(user.q1_answer) : undefined,
+      q2_answer: user.q2_answer ? sanitizeString(user.q2_answer) : undefined,
+      q3_answer: user.q3_answer ? sanitizeString(user.q3_answer) : undefined,
+      q4_answer: user.q4_answer ? sanitizeString(user.q4_answer) : undefined,
+    };
+    localStorage.setItem(MOCK_USER_KEY, JSON.stringify(sanitizedUser));
   },
 
   clearUser: (): void => {
@@ -49,7 +71,10 @@ export const mockDb = {
 
   addAction: (action: Omit<UserAction, 'id' | 'created_at'>): UserAction => {
     const newAction: UserAction = {
-      ...action,
+      user_id: sanitizeString(action.user_id),
+      action_type: sanitizeString(action.action_type),
+      score_change: action.score_change,
+      description: sanitizeString(action.description),
       id: Math.random().toString(36).substring(2, 9),
       created_at: new Date().toISOString(),
     };
