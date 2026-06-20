@@ -40,13 +40,13 @@ export default function VisualNovelBox({ questions, onComplete }: VisualNovelBox
     setIsTypingDone(false);
     setSelectedOptionIdx(null);
     
-    let index = 0;
+    let charCount = 0;
     const fullText = currentQuestion.text;
     
     const interval = setInterval(() => {
-      setTypedText((prev) => prev + fullText.charAt(index));
-      index++;
-      if (index >= fullText.length) {
+      charCount++;
+      setTypedText(fullText.slice(0, charCount));
+      if (charCount >= fullText.length) {
         clearInterval(interval);
         setIsTypingDone(true);
       }

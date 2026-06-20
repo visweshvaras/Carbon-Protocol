@@ -16,7 +16,8 @@ import {
   VolumeX,
   Tv,
   Users,
-  Sliders
+  Sliders,
+  Trophy
 } from 'lucide-react';
 import { mockDb, UserState, UserAction } from '@/lib/supabase';
 import { sounds } from '@/lib/sounds';
@@ -114,6 +115,21 @@ const scrollyDialogues = [
     expression: "happy",
     text: "Orbital descent finalized, Pilot! G.A.I.A. Command Core is online. To initialize your daily emission ledger, calibrate grid tracking, and calculate your local World Score, synchronize your cognitive interface below. The future is in your hands!"
   }
+];
+
+// Simplified English translations for scrolly dialogues (to be easily understandable by non-native speakers)
+const simpleDialoguesText = [
+  "Hi! I am Eco-Chan. Your carbon footprint is the amount of dirty air you create when you run cars, use lights, or throw away trash. Let's learn how to make our Earth clean and green!",
+  "Hi! Commander Ray here. Direct fuel means the gas and coal you burn yourself—like driving gas cars, cooking on stoves, or burning fuels in factories.",
+  "Hey! Solar-Senpai here. Purchased power is the electricity you buy. When you use lights or computers, they draw power from the electrical grid. Let's switch to sun power!",
+  "Aero-Kun here! Wind power uses giant spinning fans to make clean energy without burning coal. Slide the wind control up to make it clean!",
+  "Hello, I am Uranium-Onee-san. Sometimes the wind doesn't blow and the sun doesn't shine. Modern nuclear power works all day and night to keep the lights on without making dirty air!",
+  "Hehe! Trash-Goblin here! Everything you buy, use, and throw away makes carbon. Plastic bags, rotting food in trash bins—it all makes the Earth warmer. Throw away less!",
+  "H2-Senpai here! Heavy trucks, airplanes, and ships need a lot of power. Hydrogen fuel cells run clean and only spit out clean water, keeping shipping green!",
+  "Warning! H2O-Chan here. In hot places, everyone turns on their ACs. This uses too much coal power, making the air even hotter and creating dirty acid rain. We need to break this cycle!",
+  "Hello! Biomass-Obaasan here. Trees and plants are like natural vacuum cleaners—they suck the dirty carbon out of the sky. Composting and planting trees helps them clean the air!",
+  "Gyahahaha! I am Carbon-Daemon! The more electricity and gas you burn, the thicker my hot blanket around the Earth becomes. Soon, the planet will be a hot furnace!",
+  "We are at the control station! Now you can adjust the clean energy grids, play the arcade game, and log your green actions. Let's save the Earth together!"
 ];
 
 // Profile Database entries
@@ -261,6 +277,123 @@ const questions = [
     ]
   }
 ];
+
+// Simplified Onboarding Questions for Easy English mode
+const simplifiedQuestions = [
+  {
+    id: 1,
+    speaker: 'Eco-Chan',
+    expression: 'neutral' as const,
+    text: "Hi! Welcome. Let's start: Who do you think should pay the most to clean up dirty air and stop climate change?",
+    options: [
+      { text: "Rich countries (who started using factories and coal long ago)", points: 25 },
+      { text: "All countries should pay the same amount", points: 20 },
+      { text: "The biggest emitters today (like China, USA, and India)", points: 25 },
+      { text: "I am not sure / Let's check the data first", points: 15 }
+    ]
+  },
+  {
+    id: 2,
+    speaker: 'Eco-Chan',
+    expression: 'concerned' as const,
+    text: "The Earth is getting very warm. How do you keep your home cool during hot summer days?",
+    options: [
+      { text: "I run the air conditioner (AC) all day and night", points: 5 },
+      { text: "I use ceiling fans, cold water pots, and keep curtains closed", points: 25 },
+      { text: "I use a high-efficiency AC that uses very little electricity", points: 20 },
+      { text: "I do not have an AC / I just open windows for breeze", points: 15 }
+    ]
+  },
+  {
+    id: 3,
+    speaker: 'Eco-Chan',
+    expression: 'concerned' as const,
+    text: "What stops you from buying or using an Electric Vehicle (EV) or electric car?",
+    options: [
+      { text: "Electric cars are too expensive to buy right now", points: 15 },
+      { text: "There are no charging plug spots near my house", points: 15 },
+      { text: "The electricity comes from burning dirty coal anyway", points: 20 },
+      { text: "I already drive an electric car or want to get one soon", points: 25 }
+    ]
+  },
+  {
+    id: 4,
+    speaker: 'Eco-Chan',
+    expression: 'happy' as const,
+    text: "Got it! Which of these clean habits is easiest for you to keep doing for a long time?",
+    options: [
+      { text: "Take public buses, trains, metros, or walk and cycle", points: 25 },
+      { text: "Recycle trash, compost food waste, and throw away less", points: 20 },
+      { text: "Stop using single-use plastic cups, bags, and bottles", points: 20 },
+      { text: "Turn off lights when leaving rooms and use low-power bulbs", points: 15 }
+    ]
+  }
+];
+
+// Simplified Character Bios map for Easy English mode
+const simplifiedBios: Record<string, { role: string; status: string; quote: string; bio: string }> = {
+  eco: {
+    role: "GRID PILOT & GUIDE",
+    status: "ONLINE & ACTIVE",
+    quote: "Let's work together to make our footprint smaller!",
+    bio: "She is your helper. She wears a green hat and helps you change grid levels and record your daily actions."
+  },
+  ray: {
+    role: "DIRECT FUEL BOSS",
+    status: "READY FOR INSTRUCTIONS",
+    quote: "Every bit of fuel we save helps us win the fight!",
+    bio: "He checks the gas and coal you burn yourself—like driving gas cars or burning fuel in stoves."
+  },
+  solar: {
+    role: "SUN POWER ENGINEER",
+    status: "GRID CONNECTED",
+    quote: "Switch the grids to clean sun power! Let's save the planet!",
+    bio: "She is a happy engineer who loves solar panels. She helps switch electricity grids to clean energy."
+  },
+  aero: {
+    role: "WIND POWER LEADER",
+    status: "WIND POWER SYNCED",
+    quote: "Catch the clean wind! Turn those giant fans!",
+    bio: "He is an exciting pilot who manages wind energy, using wind turbines to make clean electricity."
+  },
+  goblin: {
+    role: "TRASH & WASTE MONITOR",
+    status: "CHECKING YOUR TRASH",
+    quote: "Plastic cups! Rotten food piles! I love trash!",
+    bio: "He tracks the waste we throw away, single-use plastics, and cargo shipping emissions."
+  },
+  nymph: {
+    role: "RAIN & AC PROTECTOR",
+    status: "SHIELD OSCILLATING",
+    quote: "AC units are making the grid too hot, and dirty rain hurts rivers!",
+    bio: "She is a water nymph who worries about heatwaves, AC overloading coal grids, and acid rain."
+  },
+  biomass: {
+    role: "FOREST & SOIL ELDER",
+    status: "FOREST MATURING",
+    quote: "Care for the soil! Planting trees cleans the air.",
+    bio: "She is a wise grandmother who knows how trees and compost suck dirty air out of the sky."
+  },
+  uranium: {
+    role: "NUCLEAR GRID MANAGER",
+    status: "REACTOR CORES OK",
+    quote: "Nuclear power works day and night to keep the lights on clean.",
+    bio: "She helps use nuclear reactors to provide clean, constant electricity when there is no wind or sun."
+  },
+  hydrogen: {
+    role: "CLEAN FUEL SPECIALIST",
+    status: "FUEL CELLS PRESSURIZED",
+    quote: "Green hydrogen cells only spit out clean water!",
+    bio: "He manages green hydrogen fuel cells for clean heavy shipping and clean airplanes."
+  },
+  daemon: {
+    role: "CARBON DEMON",
+    status: "THREAT LEVEL: DANGER",
+    quote: "Burn more gas and coal! Make my hot blanket thicker!",
+    bio: "He is the bad guy. He wants us to burn more fuel so the Earth gets trapped under a hot blanket."
+  }
+};
+
 
 // Render SVG dialogue avatars dynamically (Updated with 8 characters and support for custom expressions)
 const renderCharacterAvatar = (
@@ -540,6 +673,7 @@ export default function Home() {
   // Custom interactive controls
   const [isMuted, setIsMuted] = useState(true);
   const [crtActive, setCrtActive] = useState(true);
+  const [simpleEnglish, setSimpleEnglish] = useState(false);
   
   // Onboarding & Scrolling Navigation States
   const [scrollSection, setScrollSection] = useState(0);
@@ -581,6 +715,53 @@ export default function Home() {
   // Computed sandbox metrics
   const stabilityIndex = Math.round((calSolar * 0.2) + (calWind * 0.2) + (calNuclear * 0.2) + (calRecycle * 0.15) + (calForest * 0.15) + (calHydrogen * 0.1));
   const anomalyOffset = (1.8 - (stabilityIndex / 100) * 1.5).toFixed(2);
+
+  // Preset scenarios handler
+  const loadPreset = (presetName: string) => {
+    sounds.click();
+    if (presetName === 'coal') {
+      setCalSolar(10);
+      setCalWind(5);
+      setCalRecycle(15);
+      setCalForest(10);
+      setCalNuclear(5);
+      setCalHydrogen(0);
+      sounds.logActionNegative();
+    } else if (presetName === 'green') {
+      setCalSolar(95);
+      setCalWind(85);
+      setCalRecycle(90);
+      setCalForest(90);
+      setCalNuclear(80);
+      setCalHydrogen(75);
+      sounds.logActionPositive();
+    } else if (presetName === 'atomic') {
+      setCalSolar(25);
+      setCalWind(30);
+      setCalRecycle(40);
+      setCalForest(35);
+      setCalNuclear(100);
+      setCalHydrogen(60);
+      sounds.logActionPositive();
+    } else if (presetName === 'sinks') {
+      setCalSolar(40);
+      setCalWind(35);
+      setCalRecycle(100);
+      setCalForest(100);
+      setCalNuclear(20);
+      setCalHydrogen(20);
+      sounds.logActionPositive();
+    } else {
+      // reset
+      setCalSolar(50);
+      setCalWind(50);
+      setCalRecycle(50);
+      setCalForest(50);
+      setCalNuclear(50);
+      setCalHydrogen(50);
+      sounds.boot();
+    }
+  };
 
   // Load user data on mount
   useEffect(() => {
@@ -641,20 +822,20 @@ export default function Home() {
   // Typewriter effect for scrolly dialogues
   useEffect(() => {
     if (!mounted || user) return;
-    const text = scrollyDialogues[scrollSection].text;
+    const text = simpleEnglish ? simpleDialoguesText[scrollSection] : scrollyDialogues[scrollSection].text;
     setTypedText('');
-    let i = 0;
+    let charCount = 0;
     
     const interval = setInterval(() => {
-      setTypedText(prev => prev + text.charAt(i));
-      i++;
-      if (i >= text.length) {
+      charCount++;
+      setTypedText(text.slice(0, charCount));
+      if (charCount >= text.length) {
         clearInterval(interval);
       }
     }, 15);
     
     return () => clearInterval(interval);
-  }, [scrollSection, mounted, user]);
+  }, [scrollSection, mounted, user, simpleEnglish]);
 
   // Grid Interceptor Arcade Loop
   useEffect(() => {
@@ -904,6 +1085,18 @@ export default function Home() {
                 <Tv className={`w-4 h-4 ${crtActive ? 'text-emerald-700 font-bold' : 'text-slate-600'}`} />
               </button>
 
+              {/* Simple English Language Toggle */}
+              <button
+                onClick={() => { sounds.click(); setSimpleEnglish(!simpleEnglish); }}
+                className={`px-2.5 py-2 border-2 border-black rounded shadow-[2px_2px_0px_rgba(0,0,0,1)] hover:bg-slate-200 active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all text-xs font-mono font-bold
+                  ${simpleEnglish ? 'bg-yellow-100 text-yellow-700 border-black' : 'bg-slate-100 text-slate-600'}
+                `}
+                title="Toggle Simple English Mode"
+                aria-label="Toggle Simple English Mode"
+              >
+                {simpleEnglish ? "💬 EASY" : "💬 EN"}
+              </button>
+
               <button
                 onClick={handleInitiateQuestionnaire}
                 onMouseEnter={() => sounds.hover()}
@@ -934,14 +1127,26 @@ export default function Home() {
               <div className="lg:col-span-7 flex flex-col gap-4">
                 <div className="font-mono text-xs font-bold text-yellow-400 tracking-widest flex items-center gap-1.5">
                   <span className="h-2 w-2 rounded-full bg-yellow-400 animate-ping"></span>
-                  G.A.I.A. SIMULATION CORE V.02
+                  {simpleEnglish ? "G.A.I.A. EARTH CLEANER GAME" : "G.A.I.A. SIMULATION CORE V.02"}
                 </div>
                 <h1 className="text-4xl sm:text-6xl font-black leading-none tracking-tight font-sans text-retro-shadow">
-                  POWER YOUR PLANET.<br />
-                  REVERT THE FOOTPRINT.
+                  {simpleEnglish ? (
+                    <>
+                      SAVE YOUR EARTH.<br />
+                      MAKE THE AIR CLEAN.
+                    </>
+                  ) : (
+                    <>
+                      POWER YOUR PLANET.<br />
+                      REVERT THE FOOTPRINT.
+                    </>
+                  )}
                 </h1>
                 <p className="text-sm md:text-base font-semibold font-sans text-slate-300 max-w-xl leading-relaxed">
-                  Every lifestyle output is logged. Calibrate atmospheric stability grids, sync direct and indirect scopes, and meet the command crew database below.
+                  {simpleEnglish 
+                    ? "Everything you do makes carbon. Learn how to keep the air clean, use clean wind and solar energy, and meet the command helpers below."
+                    : "Every lifestyle output is logged. Calibrate atmospheric stability grids, sync direct and indirect scopes, and meet the command crew database below."
+                  }
                 </p>
                 <div className="mt-4 flex items-center gap-4">
                   <a
@@ -950,14 +1155,14 @@ export default function Home() {
                     onClick={() => sounds.click()}
                     className="px-6 py-3 bg-yellow-400 hover:bg-yellow-300 text-black font-mono font-bold text-xs border-2 border-black rounded shadow-[4px_4px_0px_rgba(255,255,255,1)] active:translate-x-1 active:translate-y-1 active:shadow-none transition-all"
                   >
-                    LEARN THE LEDGER
+                    {simpleEnglish ? "HOW IT WORKS" : "LEARN THE LEDGER"}
                   </a>
                   <button
                     onClick={handleInitiateQuestionnaire}
                     onMouseEnter={() => sounds.hover()}
                     className="px-6 py-3 bg-transparent hover:bg-white/10 text-white font-mono font-bold text-xs border-2 border-white rounded transition-all"
                   >
-                    START ENTRY
+                    {simpleEnglish ? "START QUIZ" : "START ENTRY"}
                   </button>
                 </div>
               </div>
@@ -973,7 +1178,7 @@ export default function Home() {
             
             {/* Scroll Indicator */}
             <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-center text-xs font-mono tracking-widest text-slate-500 animate-bounce">
-              SCROLL DOWN
+              {simpleEnglish ? "SCROLL DOWN FOR MORE" : "SCROLL DOWN"}
               <ArrowDown className="w-4 h-4 mx-auto mt-1" />
             </div>
           </section>
@@ -984,18 +1189,23 @@ export default function Home() {
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
                 
                 <div className="lg:col-span-4 border-l-4 border-black pl-4">
-                  <h2 className="text-sm font-black text-slate-400 font-mono tracking-widest uppercase">ABOUT</h2>
+                  <h2 className="text-sm font-black text-slate-400 font-mono tracking-widest uppercase">
+                    {simpleEnglish ? "INFO" : "ABOUT"}
+                  </h2>
                   <h3 className="text-2xl font-black text-slate-950 font-sans tracking-tight mt-1">
-                    G.A.I.A. EMISSION BRIEF
+                    {simpleEnglish ? "EARTH CLEANING PLAN" : "G.A.I.A. EMISSION BRIEF"}
                   </h3>
                   <div className="text-[10px] font-mono text-slate-500 font-bold uppercase mt-2">
-                    ESTD.2026 // EMISSION SYSTEM CONTEXT
+                    {simpleEnglish ? "ESTD. 2026 // SIMPLE SUMMARY" : "ESTD.2026 // EMISSION SYSTEM CONTEXT"}
                   </div>
                 </div>
 
                 <div className="lg:col-span-8">
                   <p className="text-base md:text-lg font-bold text-slate-800 leading-relaxed font-sans mb-8">
-                    Our carbon footprint consists of all greenhouse gases (predominantly Carbon Dioxide and Methane) released by household utilities, industrial operations, and lifecycle value chains. G.A.I.A. maps this ecological ledger to help users mitigate outputs and stabilize global climate grids.
+                    {simpleEnglish 
+                      ? "Your carbon footprint is how much dirty air you make. This includes running lights, using cars, or buying things. This website helps you learn how to make the air clean and stop the Earth from getting too hot!"
+                      : "Our carbon footprint consists of all greenhouse gases (predominantly Carbon Dioxide and Methane) released by household utilities, industrial operations, and lifecycle value chains. G.A.I.A. maps this ecological ledger to help users mitigate outputs and stabilize global climate grids."
+                    }
                   </p>
 
                   {/* Character dialogue card */}
@@ -1007,10 +1217,15 @@ export default function Home() {
                     </div>
                     
                     <div>
-                      <div className="font-mono text-[9px] text-yellow-400 font-bold tracking-widest uppercase">OPERATIONS BRIEF</div>
+                      <div className="font-mono text-[9px] text-yellow-400 font-bold tracking-widest uppercase">
+                        {simpleEnglish ? "EASY GUIDE" : "OPERATIONS BRIEF"}
+                      </div>
                       <h4 className="font-mono text-xs font-extrabold text-white mt-0.5">Eco-Chan</h4>
                       <p className="font-mono text-xs text-slate-300 leading-relaxed mt-2">
-                        {'Welcome to G.A.I.A. Command Station, Pilot! We have configured this visual landing console exactly in our bold, high-contrast Gifu corporate recruitment design style. Explore our atmospheric statistics and learning sections as you scroll.'}
+                        {simpleEnglish
+                          ? 'Welcome to our main station! We made this dashboard look clean and bold. Scroll down to see numbers about the Earth and learn how to help!'
+                          : 'Welcome to G.A.I.A. Command Station, Pilot! We have configured this visual landing console exactly in our bold, high-contrast Gifu corporate recruitment design style. Explore our atmospheric statistics and learning sections as you scroll.'
+                        }
                       </p>
                     </div>
                   </div>
@@ -1025,22 +1240,66 @@ export default function Home() {
             <div className="container mx-auto px-6">
               
               <div className="mb-10 text-center">
-                <h2 className="text-xs font-bold text-yellow-400 tracking-widest uppercase">TELEMETRY</h2>
-                <h3 className="text-3xl font-black font-sans mt-1">ATMOSPHERIC NUMBERS</h3>
+                <h2 className="text-xs font-bold text-yellow-400 tracking-widest uppercase">
+                  {simpleEnglish ? "NUMBERS" : "TELEMETRY"}
+                </h2>
+                <h3 className="text-3xl font-black font-sans mt-1">
+                  {simpleEnglish ? "AIR QUALITY NUMBERS" : "ATMOSPHERIC NUMBERS"}
+                </h3>
               </div>
 
               {/* Statistics Grid Panel */}
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
                 
                 {[
-                  { label: "CO2 Saturation", val: "420 PPM", color: "text-white", desc: "Greenhouse particles saturation index in our air column." },
-                  { label: "Heat Anomaly", val: "+1.20°C", color: "text-rose-500", desc: "Global surface average peak temperature anomaly deviation." },
-                  { label: "Remaining Budget", val: "110 Mos", color: "text-yellow-500", desc: "Critical global window left before breaching thermal threshold." },
-                  { label: "India Peak AC Load", val: "10 Hrs/D", color: "text-white", desc: "Summer cooling grid demand duration accelerating feedback loops." },
-                  { label: "Offset Cases", val: "1200+", color: "text-white", desc: "Clean afforestation offset operations logged by active pilots." },
-                  { label: "Annual Quota", val: "36 Tons", color: "text-white", desc: "Maximum target carbon ceiling allowance per household unit." },
-                  { label: "Emissions Ratio", val: "6 : 4", color: "text-white", desc: "Ratio comparing indirect lifecycle value chains to direct fuels." },
-                  { label: "Reactor Status", val: "100 HP", color: "text-emerald-400", desc: "Optimal core atmospheric safety starting baseline HP levels." }
+                  { 
+                    label: simpleEnglish ? "💨 Dirty Air (CO2) Level" : "CO2 Saturation", 
+                    val: "420 PPM", 
+                    color: "text-white", 
+                    desc: simpleEnglish ? "How many dirty air particles are in our sky right now." : "Greenhouse particles saturation index in our air column." 
+                  },
+                  { 
+                    label: simpleEnglish ? "🌡️ Temperature Rise" : "Heat Anomaly", 
+                    val: "+1.20°C", 
+                    color: "text-rose-500", 
+                    desc: simpleEnglish ? "How much hotter the Earth is today compared to normal times." : "Global surface average peak temperature anomaly deviation." 
+                  },
+                  { 
+                    label: simpleEnglish ? "⏳ Time Left to Act" : "Remaining Budget", 
+                    val: "110 Mos", 
+                    color: "text-yellow-500", 
+                    desc: simpleEnglish ? "Months left to fix our emissions before it gets very dangerous." : "Critical global window left before breaching thermal threshold." 
+                  },
+                  { 
+                    label: simpleEnglish ? "🔌 India AC Usage" : "India Peak AC Load", 
+                    val: "10 Hrs/D", 
+                    color: "text-white", 
+                    desc: simpleEnglish ? "Hours every day people run ACs, which makes electricity grids work too hard." : "Summer cooling grid demand duration accelerating feedback loops." 
+                  },
+                  { 
+                    label: simpleEnglish ? "🌳 Trees Planted" : "Offset Cases", 
+                    val: "1200+", 
+                    color: "text-white", 
+                    desc: simpleEnglish ? "Good things like planting trees that clean the air." : "Clean afforestation offset operations logged by active pilots." 
+                  },
+                  { 
+                    label: simpleEnglish ? "📊 Yearly Carbon Limit" : "Annual Quota", 
+                    val: "36 Tons", 
+                    color: "text-white", 
+                    desc: simpleEnglish ? "Max amount of carbon a home should make in one year." : "Maximum target carbon ceiling allowance per household unit." 
+                  },
+                  { 
+                    label: simpleEnglish ? "📦 Buying vs Burning" : "Emissions Ratio", 
+                    val: "6 : 4", 
+                    color: "text-white", 
+                    desc: simpleEnglish ? "Comparing carbon from buying things vs burning gas and coal." : "Ratio comparing indirect lifecycle value chains to direct fuels." 
+                  },
+                  { 
+                    label: simpleEnglish ? "❤️ Earth Health HP" : "Reactor Status", 
+                    val: "100 HP", 
+                    color: "text-emerald-400", 
+                    desc: simpleEnglish ? "How healthy our planet's air and temperature are right now." : "Optimal core atmospheric safety starting baseline HP levels." 
+                  }
                 ].map((item, idx) => (
                   <motion.div 
                     key={idx}
@@ -1066,18 +1325,46 @@ export default function Home() {
             <div className="container mx-auto px-6">
               
               <div className="mb-12 border-l-4 border-black pl-4">
-                <h2 className="text-xs font-bold text-slate-400 font-mono tracking-widest uppercase">CLASSIFICATIONS</h2>
-                <h3 className="text-2xl font-black font-sans tracking-tight mt-1">EMISSION SCOPES</h3>
+                <h2 className="text-xs font-bold text-slate-400 font-mono tracking-widest uppercase">
+                  {simpleEnglish ? "CATEGORIES" : "CLASSIFICATIONS"}
+                </h2>
+                <h3 className="text-2xl font-black font-sans tracking-tight mt-1">
+                  {simpleEnglish ? "TYPES OF DIRTY AIR" : "EMISSION SCOPES"}
+                </h3>
               </div>
 
               {/* Cards Grid */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 
                 {[
-                  { id: "01", name: "Scope 1: Direct", desc: "Direct greenhouse gas emissions released by sources owned or controlled by you (e.g. burning gas in heating furnaces or operating vehicle exhausts).", status: "OBSERVING", bg: "bg-[#faf9f6]" },
-                  { id: "02", name: "Scope 2: Utility", desc: "Indirect emissions tracking purchased utilities and grid electricity consumption. Includes home appliances, wind turbine load, and solar subgrids.", status: "OBSERVING", bg: "bg-[#faf9f6]" },
-                  { id: "03", name: "Scope 3: Lifecycle", desc: "Value chain emissions tracking everything you procure, consume, and discard. From manufacturing processing to logistics transport and landfill decomposition.", status: "OBSERVING", bg: "bg-[#faf9f6]" },
-                  { id: "04", name: "Offset: Revert", desc: "Emissions recovery through clean activities. Logging zero-emission transit modes, organic compost sinks, and reforestation to restore core safety.", status: "INTEGRATED", bg: "bg-yellow-400" }
+                  { 
+                    id: "01", 
+                    name: simpleEnglish ? "Direct: Burning Fuel" : "Scope 1: Direct", 
+                    desc: simpleEnglish ? "Dirty air you make yourself. For example: burning gas in stoves, or driving gasoline cars." : "Direct greenhouse gas emissions released by sources owned or controlled by you (e.g. burning gas in heating furnaces or operating vehicle exhausts).", 
+                    status: simpleEnglish ? "WATCHING" : "OBSERVING", 
+                    bg: "bg-[#faf9f6]" 
+                  },
+                  { 
+                    id: "02", 
+                    name: simpleEnglish ? "Utility: Home Power" : "Scope 2: Utility", 
+                    desc: simpleEnglish ? "Dirty air from using electricity, like running ACs, lights, or charging devices at home." : "Indirect emissions tracking purchased utilities and grid electricity consumption. Includes home appliances, wind turbine load, and solar subgrids.", 
+                    status: simpleEnglish ? "WATCHING" : "OBSERVING", 
+                    bg: "bg-[#faf9f6]" 
+                  },
+                  { 
+                    id: "03", 
+                    name: simpleEnglish ? "Lifecycle: Buying Things" : "Scope 3: Lifecycle", 
+                    desc: simpleEnglish ? "Dirty air made when making and shipping things you buy, and trash rotting in landfills." : "Value chain emissions tracking everything you procure, consume, and discard. From manufacturing processing to logistics transport and landfill decomposition.", 
+                    status: simpleEnglish ? "WATCHING" : "OBSERVING", 
+                    bg: "bg-[#faf9f6]" 
+                  },
+                  { 
+                    id: "04", 
+                    name: simpleEnglish ? "Offsets: Clean Air" : "Offset: Revert", 
+                    desc: simpleEnglish ? "Doing good things to clean the air, like planting trees or recycling plastic." : "Emissions recovery through clean activities. Logging zero-emission transit modes, organic compost sinks, and reforestation to restore core safety.", 
+                    status: simpleEnglish ? "WORKING" : "INTEGRATED", 
+                    bg: "bg-yellow-400" 
+                  }
                 ].map((item, idx) => (
                   <motion.div 
                     key={idx}
@@ -1112,9 +1399,11 @@ export default function Home() {
               <div className="mb-12 border-l-4 border-black pl-4">
                 <h2 className="text-xs font-bold text-slate-400 font-mono tracking-widest uppercase flex items-center gap-2">
                   <Users className="w-4 h-4 text-sky-600" />
-                  DATABASE CONSOLE
+                  {simpleEnglish ? "CREW LIST" : "DATABASE CONSOLE"}
                 </h2>
-                <h3 className="text-2xl font-black font-sans tracking-tight mt-1">CHARACTER DECK ARCHIVES</h3>
+                <h3 className="text-2xl font-black font-sans tracking-tight mt-1">
+                  {simpleEnglish ? "MEET THE HELPERS" : "CHARACTER DECK ARCHIVES"}
+                </h3>
               </div>
 
               {/* Cards layout */}
@@ -1137,7 +1426,7 @@ export default function Home() {
                       </div>
 
                       <div className="font-mono text-[9px] text-slate-500 font-bold uppercase tracking-wider">
-                        {char.role}
+                        {simpleEnglish ? (simplifiedBios[char.id]?.role || char.role) : char.role}
                       </div>
                       
                       <h4 className="font-sans font-black text-lg text-slate-950 mt-1 uppercase tracking-tight">
@@ -1145,15 +1434,15 @@ export default function Home() {
                       </h4>
 
                       <span className="inline-block text-[8px] font-mono font-bold bg-slate-100 border border-black rounded px-1.5 py-0.5 mt-2 text-slate-800">
-                        {char.status}
+                        {simpleEnglish ? (simplifiedBios[char.id]?.status || char.status) : char.status}
                       </span>
 
                       <p className="text-xs text-slate-700 font-medium leading-relaxed mt-3 italic">
-                        {`"${char.quote}"`}
+                        {`"${simpleEnglish ? (simplifiedBios[char.id]?.quote || char.quote) : char.quote}"`}
                       </p>
 
                       <p className="text-[11px] text-slate-600 leading-normal mt-2">
-                        {char.bio}
+                        {simpleEnglish ? (simplifiedBios[char.id]?.bio || char.bio) : char.bio}
                       </p>
                     </div>
 
@@ -1258,16 +1547,20 @@ export default function Home() {
                 <div className="lg:col-span-7 border-4 border-black p-6 bg-slate-900 rounded-lg text-white shadow-[6px_6px_0px_rgba(0,0,0,1)] flex flex-col justify-between">
                   <div>
                     <h4 className="font-mono font-bold text-xs text-yellow-400 tracking-wider mb-6 flex items-center justify-between border-b border-slate-800 pb-2">
-                      <span>🎛️ SIMULATION CONTROLS</span>
-                      <span className="text-[10px] text-slate-500 font-normal">LEDGER RUNTIME</span>
+                      <span>{simpleEnglish ? "🎛️ ADJUST CLEAN ENERGY" : "🎛️ SIMULATION CONTROLS"}</span>
+                      <span className="text-[10px] text-slate-500 font-normal">
+                        {simpleEnglish ? "SIMULATOR BOARD" : "LEDGER RUNTIME"}
+                      </span>
                     </h4>
 
                     <div className="space-y-6">
                       {/* Slider 1: Solar */}
                       <div className="space-y-2">
                         <div className="flex justify-between font-mono text-xs">
-                          <span className="font-bold text-amber-400">☀️ SOLAR GRID INFRASTRUCTURE</span>
-                          <span>{calSolar}% Power Ratio</span>
+                          <span className="font-bold text-amber-400">
+                            {simpleEnglish ? "☀️ SUN POWER (SOLAR)" : "☀️ SOLAR GRID INFRASTRUCTURE"}
+                          </span>
+                          <span>{calSolar}% {simpleEnglish ? "Sun Power" : "Power Ratio"}</span>
                         </div>
                         <input
                           type="range"
@@ -1283,8 +1576,10 @@ export default function Home() {
                       {/* Slider 2: Wind */}
                       <div className="space-y-2">
                         <div className="flex justify-between font-mono text-xs">
-                          <span className="font-bold text-cyan-400">💨 WIND TURBINES DEPLOYMENT</span>
-                          <span>{calWind}% Clean Wind</span>
+                          <span className="font-bold text-cyan-400">
+                            {simpleEnglish ? "💨 WIND POWER (TURBINES)" : "💨 WIND TURBINES DEPLOYMENT"}
+                          </span>
+                          <span>{calWind}% {simpleEnglish ? "Wind Power" : "Clean Wind"}</span>
                         </div>
                         <input
                           type="range"
@@ -1300,8 +1595,10 @@ export default function Home() {
                       {/* Slider 3: Recycle */}
                       <div className="space-y-2">
                         <div className="flex justify-between font-mono text-xs">
-                          <span className="font-bold text-emerald-400">♻️ ORGANIC COMPOST & RECYCLING</span>
-                          <span>{calRecycle}% Diversion Rate</span>
+                          <span className="font-bold text-emerald-400">
+                            {simpleEnglish ? "♻️ RECYCLING TRASH & COMPOST" : "♻️ ORGANIC COMPOST & RECYCLING"}
+                          </span>
+                          <span>{calRecycle}% {simpleEnglish ? "Recycled" : "Diversion Rate"}</span>
                         </div>
                         <input
                           type="range"
@@ -1317,8 +1614,10 @@ export default function Home() {
                       {/* Slider 4: Forests */}
                       <div className="space-y-2">
                         <div className="flex justify-between font-mono text-xs">
-                          <span className="font-bold text-green-400">🌲 BIOLOGICAL FOREST SINKS</span>
-                          <span>{calForest}% Canopy Recover</span>
+                          <span className="font-bold text-green-400">
+                            {simpleEnglish ? "🌲 PLANTING TREES (FORESTS)" : "🌲 BIOLOGICAL FOREST SINKS"}
+                          </span>
+                          <span>{calForest}% {simpleEnglish ? "Forest Cover" : "Canopy Recover"}</span>
                         </div>
                         <input
                           type="range"
@@ -1334,8 +1633,10 @@ export default function Home() {
                       {/* Slider 5: Nuclear */}
                       <div className="space-y-2">
                         <div className="flex justify-between font-mono text-xs">
-                          <span className="font-bold text-purple-400">⚛️ BASE-LOAD ATOMIC POWER</span>
-                          <span>{calNuclear}% Base capacity</span>
+                          <span className="font-bold text-purple-400">
+                            {simpleEnglish ? "⚛️ NUCLEAR ENERGY (ATOMIC)" : "⚛️ BASE-LOAD ATOMIC POWER"}
+                          </span>
+                          <span>{calNuclear}% {simpleEnglish ? "Nuclear Power" : "Base capacity"}</span>
                         </div>
                         <input
                           type="range"
@@ -1351,8 +1652,10 @@ export default function Home() {
                       {/* Slider 6: Hydrogen */}
                       <div className="space-y-2">
                         <div className="flex justify-between font-mono text-xs">
-                          <span className="font-bold text-blue-400">💧 GREEN HYDROGEN CELLS</span>
-                          <span>{calHydrogen}% Fuel usage</span>
+                          <span className="font-bold text-blue-400">
+                            {simpleEnglish ? "💧 HYDROGEN CLEAN FUEL" : "💧 GREEN HYDROGEN CELLS"}
+                          </span>
+                          <span>{calHydrogen}% {simpleEnglish ? "Hydrogen Fuel" : "Fuel usage"}</span>
                         </div>
                         <input
                           type="range"
@@ -1365,11 +1668,55 @@ export default function Home() {
                         />
                       </div>
                     </div>
+
+                    {/* Scenario presets row */}
+                    <div className="mt-6 pt-4 border-t border-slate-800">
+                      <span className="block font-mono text-[9px] font-bold text-slate-500 uppercase tracking-widest mb-2.5">
+                        {simpleEnglish ? "⚡ Quick Grid Presets" : "⚡ Quick Scenario Presets"}
+                      </span>
+                      <div className="flex flex-wrap gap-2">
+                        <button
+                          onClick={() => loadPreset('coal')}
+                          onMouseEnter={() => sounds.hover()}
+                          className="px-2.5 py-1.5 bg-rose-950/40 text-rose-400 border-2 border-black text-[9px] font-mono font-bold rounded shadow-[2px_2px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none hover:bg-rose-900/40 transition-all uppercase"
+                        >
+                          {simpleEnglish ? "⚠️ More Coal" : "⚠️ Coal Focus"}
+                        </button>
+                        <button
+                          onClick={() => loadPreset('green')}
+                          onMouseEnter={() => sounds.hover()}
+                          className="px-2.5 py-1.5 bg-emerald-950/40 text-emerald-400 border-2 border-black text-[9px] font-mono font-bold rounded shadow-[2px_2px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none hover:bg-emerald-900/40 transition-all uppercase"
+                        >
+                          {simpleEnglish ? "☀️ Eco Grid" : "☀️ Green Era"}
+                        </button>
+                        <button
+                          onClick={() => loadPreset('atomic')}
+                          onMouseEnter={() => sounds.hover()}
+                          className="px-2.5 py-1.5 bg-purple-950/40 text-purple-400 border-2 border-black text-[9px] font-mono font-bold rounded shadow-[2px_2px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none hover:bg-purple-900/40 transition-all uppercase"
+                        >
+                          {simpleEnglish ? "⚛️ Nuclear Mode" : "⚛️ Atomic Grid"}
+                        </button>
+                        <button
+                          onClick={() => loadPreset('sinks')}
+                          onMouseEnter={() => sounds.hover()}
+                          className="px-2.5 py-1.5 bg-green-950/40 text-green-400 border-2 border-black text-[9px] font-mono font-bold rounded shadow-[2px_2px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none hover:bg-green-900/40 transition-all uppercase"
+                        >
+                          {simpleEnglish ? "🌲 More Trees" : "🌲 Bio Sinks"}
+                        </button>
+                        <button
+                          onClick={() => loadPreset('reset')}
+                          onMouseEnter={() => sounds.hover()}
+                          className="px-2.5 py-1.5 bg-slate-800 text-slate-300 border-2 border-black text-[9px] font-mono font-bold rounded shadow-[2px_2px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none hover:bg-slate-700 transition-all uppercase"
+                        >
+                          {simpleEnglish ? "🔄 Reset Core" : "🔄 Reset Core"}
+                        </button>
+                      </div>
+                    </div>
                   </div>
 
-                  <div className="mt-8 border-t border-slate-800 pt-4 flex justify-between items-center text-[10px] font-mono text-slate-500">
-                    <span>SYS_SIMULATION: CONNECTED</span>
-                    <span>MATRIX MODE V.02</span>
+                  <div className="mt-6 border-t border-slate-800 pt-4 flex justify-between items-center text-[10px] font-mono text-slate-500">
+                    <span>{simpleEnglish ? "SYSTEM: ON" : "SYS_SIMULATION: CONNECTED"}</span>
+                    <span>{simpleEnglish ? "GAME BOARD" : "MATRIX MODE V.02"}</span>
                   </div>
                 </div>
 
@@ -1377,20 +1724,24 @@ export default function Home() {
                 <div className="lg:col-span-5 border-4 border-black p-6 bg-white rounded-lg shadow-[6px_6px_0px_rgba(0,0,0,1)] flex flex-col justify-between">
                   <div>
                     <h4 className="font-mono font-bold text-xs text-slate-400 tracking-wider mb-4 border-b pb-2">
-                      📡 WORLD RECOVERY STATUS
+                      {simpleEnglish ? "📡 EARTH HEALING STATUS" : "📡 WORLD RECOVERY STATUS"}
                     </h4>
 
                     {/* Gauges */}
                     <div className="grid grid-cols-2 gap-4">
                       <div className="border-2 border-black p-4 bg-slate-50 rounded text-center">
-                        <span className="text-[10px] font-mono font-bold text-slate-500 uppercase">GRID STABILITY</span>
+                        <span className="text-[10px] font-mono font-bold text-slate-500 uppercase">
+                          {simpleEnglish ? "CLEAN ENERGY RATIO" : "GRID STABILITY"}
+                        </span>
                         <div className={`text-3xl font-black font-sans mt-2 ${stabilityIndex >= 65 ? 'text-emerald-600' : stabilityIndex >= 40 ? 'text-amber-500' : 'text-rose-600'}`}>
                           {stabilityIndex}%
                         </div>
                       </div>
 
                       <div className="border-2 border-black p-4 bg-slate-50 rounded text-center">
-                        <span className="text-[10px] font-mono font-bold text-slate-500 uppercase">ANOMALY DEV</span>
+                        <span className="text-[10px] font-mono font-bold text-slate-500 uppercase">
+                          {simpleEnglish ? "TEMPERATURE RISE" : "ANOMALY DEV"}
+                        </span>
                         <div className={`text-3xl font-black font-sans mt-2 ${stabilityIndex >= 65 ? 'text-emerald-600' : stabilityIndex >= 40 ? 'text-amber-500' : 'text-rose-600'}`}>
                           +{anomalyOffset}°C
                         </div>
@@ -1419,11 +1770,19 @@ export default function Home() {
 
                   <div className="mt-6">
                     <p className="font-mono text-xs leading-relaxed text-slate-700 bg-slate-100 border border-slate-200 rounded p-3">
-                      {stabilityIndex >= 65 
-                        ? '>> LOG: Clean utility grids established. Carbon-Daemon is losing containment! Uranium-Onee-san reports core baseline stabilized. H2-Senpai reports heavy cargo transport pressurized and running clean.' 
-                        : stabilityIndex >= 40 
-                        ? '>> LOG: System balanced but sub-critical. H2-Senpai suggests boosting green hydrogen fuel ratios to clear remaining Scope 3 heavy haul deficits.' 
-                        : '>> LOG: WARNING! High utility fossil fuels overloading local lines. Uranium-Onee-san warns of base-load deficit! Initiate baseline reactor calibrations immediately!'}
+                      {simpleEnglish ? (
+                        stabilityIndex >= 65 
+                          ? '>> SYSTEM: The grid is very clean now! The Carbon Demon is running away! Wind, solar, and nuclear power are working great together.' 
+                          : stabilityIndex >= 40 
+                          ? '>> SYSTEM: The energy grid is okay, but we can make it cleaner. Try increasing wind, solar, or planting more trees!' 
+                          : '>> SYSTEM: WARNING! Too much coal and fossil fuels are being burned. Solar, wind, and nuclear are too low. Slide the clean controls up!'
+                      ) : (
+                        stabilityIndex >= 65 
+                          ? '>> LOG: Clean utility grids established. Carbon-Daemon is losing containment! Uranium-Onee-san reports core baseline stabilized. H2-Senpai reports heavy cargo transport pressurized and running clean.' 
+                          : stabilityIndex >= 40 
+                          ? '>> LOG: System balanced but sub-critical. H2-Senpai suggests boosting green hydrogen fuel ratios to clear remaining Scope 3 heavy haul deficits.' 
+                          : '>> LOG: WARNING! High utility fossil fuels overloading local lines. Uranium-Onee-san warns of base-load deficit! Initiate baseline reactor calibrations immediately!'
+                      )}
                     </p>
                   </div>
                 </div>
@@ -1438,8 +1797,12 @@ export default function Home() {
             <div className="container mx-auto px-6">
               
               <div className="mb-10 text-center">
-                <h2 className="text-xs font-bold text-yellow-400 tracking-widest uppercase">Briefing console</h2>
-                <h3 className="text-3xl font-black font-sans mt-1">SCROLLYTELLING VIEWPORT</h3>
+                <h2 className="text-xs font-bold text-yellow-400 tracking-widest uppercase">
+                  {simpleEnglish ? "STORY MODE" : "Briefing console"}
+                </h2>
+                <h3 className="text-3xl font-black font-sans mt-1">
+                  {simpleEnglish ? "MEET THE TEAM STORY" : "SCROLLYTELLING VIEWPORT"}
+                </h3>
               </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
@@ -1451,10 +1814,10 @@ export default function Home() {
                       <div className="flex items-center justify-between border-b border-slate-900/60 pb-2 mb-4">
                         <span className="text-[9px] text-yellow-400 font-bold tracking-widest uppercase flex items-center gap-1.5">
                           <span className="h-1.5 w-1.5 rounded-full bg-yellow-400 animate-ping"></span>
-                          TRANSMISSION NODE
+                          {simpleEnglish ? "SPEECHES // DIALOGUE" : "TRANSMISSION NODE"}
                         </span>
                         <span className="text-[9px] text-slate-500 font-bold font-mono">
-                          BRIEFING: 0{scrollSection + 1} / 09
+                          {simpleEnglish ? "LESSON:" : "BRIEFING:"} 0{scrollSection + 1} / 09
                         </span>
                       </div>
                       
@@ -1466,7 +1829,9 @@ export default function Home() {
                           )}
                         </div>
                         <div>
-                          <div className="font-mono text-[9px] text-slate-500 uppercase tracking-widest">Speaker:</div>
+                          <div className="font-mono text-[9px] text-slate-500 uppercase tracking-widest">
+                            {simpleEnglish ? "Person talking:" : "Speaker:"}
+                          </div>
                           <h4 className="font-mono text-sm font-black text-white">{scrollyDialogues[scrollSection].speaker}</h4>
                         </div>
                       </div>
@@ -1477,7 +1842,10 @@ export default function Home() {
                     </div>
 
                     <div className="text-[9px] text-slate-500 uppercase tracking-widest mt-4">
-                      {`[Descent Level: ${Math.round(scrollProgress * 100)}% // Scroll down to advance]`}
+                      {simpleEnglish 
+                        ? `[Page Progress: ${Math.round(scrollProgress * 100)}% // Scroll down to read more]`
+                        : `[Descent Level: ${Math.round(scrollProgress * 100)}% // Scroll down to advance]`
+                      }
                     </div>
                   </div>
 
@@ -1523,12 +1891,17 @@ export default function Home() {
             </div>
 
             <div className="container mx-auto px-6 relative z-10">
-              <h2 className="text-xs font-bold tracking-widest uppercase text-black/60 mb-2">ONBOARDING LINK</h2>
+              <h2 className="text-xs font-bold tracking-widest uppercase text-black/60 mb-2">
+                {simpleEnglish ? "START THE GAME" : "ONBOARDING LINK"}
+              </h2>
               <h3 className="text-3xl sm:text-5xl font-black font-sans leading-none tracking-tight mb-4">
-                COGNITIVE NODE INTERFACE
+                {simpleEnglish ? "START YOUR JOURNEY" : "COGNITIVE NODE INTERFACE"}
               </h3>
               <p className="text-xs sm:text-sm font-semibold max-w-lg mx-auto leading-relaxed text-black/85 mb-8">
-                Connect your interface to calculate your starting environmental HP score. Complete the visual novel dialogue assessment questions to calibrate G.A.I.A. ledgers.
+                {simpleEnglish 
+                  ? "Press the button below to answer 4 simple questions and see your starting Earth Health score!"
+                  : "Connect your interface to calculate your starting environmental HP score. Complete the visual novel dialogue assessment questions to calibrate G.A.I.A. ledgers."
+                }
               </p>
 
               <button
@@ -1537,7 +1910,7 @@ export default function Home() {
                 className="px-10 py-5 bg-black hover:bg-slate-900 text-white font-mono font-black text-base border-4 border-black rounded-lg shadow-[6px_6px_0px_rgba(255,255,255,1)] hover:translate-y-[-2px] active:translate-y-[2px] transition-transform flex items-center gap-3 mx-auto"
               >
                 <LogIn className="w-5 h-5 text-yellow-400" />
-                START ENTRY ASSESSMENT
+                {simpleEnglish ? "START ENTRY QUIZ" : "START ENTRY ASSESSMENT"}
               </button>
             </div>
           </section>
@@ -1573,14 +1946,28 @@ export default function Home() {
               <div className="flex items-center gap-2 font-mono">
                 <span className="h-2 w-2 bg-emerald-500 animate-ping rounded-full"></span>
                 <span className="text-xs font-bold uppercase tracking-wider text-emerald-400">
-                  ONBOARDING LINK // CLIMATE ALIGNMENT MODULE
+                  {simpleEnglish ? "WELCOME // HELLO PILOT" : "ONBOARDING LINK // CLIMATE ALIGNMENT MODULE"}
                 </span>
               </div>
-              <span className="text-[10px] text-slate-400 uppercase font-bold">G.A.I.A. CORE COGNITION</span>
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={() => { sounds.click(); setSimpleEnglish(!simpleEnglish); }}
+                  className={`px-2 py-1 border-2 border-emerald-500 rounded text-[9px] font-mono font-bold hover:bg-emerald-950/40 active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all
+                    ${simpleEnglish ? 'bg-emerald-500 text-black border-emerald-500' : 'bg-transparent text-emerald-400 border-emerald-500'}
+                  `}
+                  title="Toggle Simple English Mode"
+                  aria-label="Toggle Simple English Mode"
+                >
+                  {simpleEnglish ? "💬 EASY" : "💬 EN"}
+                </button>
+                <span className="text-[10px] text-slate-400 uppercase font-bold hidden sm:inline">
+                  {simpleEnglish ? "EASY GUIDE" : "G.A.I.A. CORE COGNITION"}
+                </span>
+              </div>
             </div>
             
             <VisualNovelBox
-              questions={questions}
+              questions={simpleEnglish ? simplifiedQuestions : questions}
               onComplete={handleQuestionnaireComplete}
             />
           </div>
@@ -1597,23 +1984,37 @@ export default function Home() {
               </div>
               <div>
                 <h1 className="font-sans font-black text-lg md:text-xl tracking-tight uppercase text-slate-950">
-                  ATMOSPHERIC LEDGER COMMAND STATION
+                  {simpleEnglish ? "CLEAN AIR CONTROL STATION" : "ATMOSPHERIC LEDGER COMMAND STATION"}
                 </h1>
                 <div className="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[9px] text-slate-500 font-bold uppercase mt-0.5">
                   <span className="flex items-center gap-1 text-slate-900">
                     <User className="w-3 h-3 text-slate-900" />
-                    PILOT: Eco-Pilot
+                    {simpleEnglish ? "YOUR NAME: Eco-Pilot" : "PILOT: Eco-Pilot"}
                   </span>
                   <span className="text-slate-300">|</span>
-                  <span>SECT: SURFACE EMISSIONS</span>
+                  <span>{simpleEnglish ? "ROOM: DAILY ACTION COCKPIT" : "SECT: SURFACE EMISSIONS"}</span>
                   <span className="text-slate-300">|</span>
-                  <span className="text-emerald-600 animate-pulse">GRID_LINK: ESTABLISHED</span>
+                  <span className="text-emerald-600 animate-pulse">
+                    {simpleEnglish ? "INTERNET: CONNECTED" : "GRID_LINK: ESTABLISHED"}
+                  </span>
                 </div>
               </div>
             </div>
 
             {/* Header Deck Actions */}
             <div className="flex items-center gap-3">
+              {/* Simple English Language Toggle */}
+              <button
+                onClick={() => { sounds.click(); setSimpleEnglish(!simpleEnglish); }}
+                className={`px-2.5 py-2 border-2 border-black rounded shadow-[2px_2px_0px_rgba(0,0,0,1)] hover:bg-slate-200 active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all text-xs font-mono font-bold
+                  ${simpleEnglish ? 'bg-yellow-100 text-yellow-700 border-black' : 'bg-slate-100 text-slate-600'}
+                `}
+                title="Toggle Simple English Mode"
+                aria-label="Toggle Simple English Mode"
+              >
+                {simpleEnglish ? "💬 EASY" : "💬 EN"}
+              </button>
+
               {/* Sound Toggler */}
               <button
                 onClick={toggleSoundMute}
@@ -1657,7 +2058,7 @@ export default function Home() {
                 <div>
                   <div className="border-b border-slate-200 pb-2 mb-3 font-mono font-extrabold text-[10px] text-slate-400 tracking-widest flex items-center gap-1.5">
                     <Heart className="w-3.5 h-3.5 text-red-500 fill-red-500 animate-pulse" />
-                    REACTOR SHIELD INTEGRITY
+                    {simpleEnglish ? "EARTH SHIELD HEALTH" : "REACTOR SHIELD INTEGRITY"}
                   </div>
 
                   <div className="flex flex-col justify-center py-2">
@@ -1676,17 +2077,25 @@ export default function Home() {
                     </div>
 
                     <div className="mt-3 text-[9px] text-slate-500 font-semibold leading-relaxed p-2 bg-slate-50 border border-slate-200 rounded text-center uppercase tracking-wider">
-                      {user.score >= 75 
-                        ? 'Core Status: STABLE // High carbon shield integrity' 
-                        : user.score >= 50 
-                        ? 'Core Status: GRID_HAZE // Local temperatures deviating' 
-                        : 'Core Status: MELTDOWN // Atmospheric integrity collapsing'}
+                      {simpleEnglish ? (
+                        user.score >= 75 
+                          ? 'Earth status: GREAT // High shield health!' 
+                          : user.score >= 50 
+                          ? 'Earth status: WARNING // Temperature rising!' 
+                          : 'Earth status: MELTDOWN // Air is very dirty!'
+                      ) : (
+                        user.score >= 75 
+                          ? 'Core Status: STABLE // High carbon shield integrity' 
+                          : user.score >= 50 
+                          ? 'Core Status: GRID_HAZE // Local temperatures deviating' 
+                          : 'Core Status: MELTDOWN // Atmospheric integrity collapsing'
+                      )}
                     </div>
                   </div>
                 </div>
 
                 <div className="border-t border-slate-200 pt-2 text-[8px] text-slate-400 font-bold uppercase text-center tracking-widest">
-                  SYS_REACTOR_INTEGRITY: GOOD
+                  {simpleEnglish ? "SHIELD STATUS: OK" : "SYS_REACTOR_INTEGRITY: GOOD"}
                 </div>
               </div>
 
@@ -1694,7 +2103,7 @@ export default function Home() {
               <div className="border-4 border-black p-5 bg-white rounded-lg shadow-[4px_4px_0px_rgba(0,0,0,1)] flex flex-col justify-between h-[180px] shrink-0">
                 <div className="border-b border-slate-200 pb-2 mb-2 font-mono font-extrabold text-[10px] text-slate-400 tracking-widest flex items-center gap-1.5">
                   <Compass className="w-3.5 h-3.5 animate-spin" style={{ animationDuration: '6s' }} />
-                  CO2 TOXICITY RADAR SCAN
+                  {simpleEnglish ? "SMOG & DIRTY AIR RADAR" : "CO2 TOXICITY RADAR SCAN"}
                 </div>
 
                 <div className="flex-1 relative flex items-center justify-center">
@@ -1712,7 +2121,48 @@ export default function Home() {
                   </svg>
                 </div>
                 <div className="text-[8px] text-slate-400 font-bold uppercase text-center w-full">
-                  RADAR_CO2_PPM: {user.score < 50 ? 'GRID_OVERRUN' : 'METRIC_STABLE'}
+                  {simpleEnglish ? (
+                    `DIRTY AIR: ${user.score < 50 ? 'TOO HIGH' : 'STABLE'}`
+                  ) : (
+                    `RADAR_CO2_PPM: ${user.score < 50 ? 'GRID_OVERRUN' : 'METRIC_STABLE'}`
+                  )}
+                </div>
+              </div>
+
+              {/* Widget C: Global Command Leaderboard */}
+              <div className="border-4 border-black p-4 bg-white rounded-lg shadow-[4px_4px_0px_rgba(0,0,0,1)] flex flex-col justify-between flex-1 min-h-[220px]">
+                <div>
+                  <div className="border-b border-slate-200 pb-2 mb-2.5 font-mono font-extrabold text-[10px] text-slate-400 tracking-widest flex items-center gap-1.5">
+                    <Trophy className="w-3.5 h-3.5 text-yellow-500 fill-yellow-500" />
+                    {simpleEnglish ? "SCOREBOARD (BEST PLAYERS)" : "GLOBAL COMMAND LEADERBOARD"}
+                  </div>
+
+                  <div className="space-y-2 font-mono text-[9px] text-slate-700">
+                    <div className="flex items-center justify-between p-1.5 border border-slate-100 rounded">
+                      <span className="text-slate-500">01. URANIUM-TEAM-A</span>
+                      <span className="font-bold text-emerald-600">98 HP</span>
+                    </div>
+                    <div className="flex items-center justify-between p-1.5 border border-slate-100 rounded">
+                      <span className="text-slate-500">02. H2-SENPAI-SQUAD</span>
+                      <span className="font-bold text-emerald-600">92 HP</span>
+                    </div>
+                    <div className="flex items-center justify-between p-1.5 bg-yellow-400/20 border-2 border-black rounded font-black">
+                      <span className="text-black">03. ECO-PILOT (YOU)</span>
+                      <span className="text-black">{user.score} HP</span>
+                    </div>
+                    <div className="flex items-center justify-between p-1.5 border border-slate-100 rounded">
+                      <span className="text-slate-500">04. AERO-ALLIANCE</span>
+                      <span className="font-bold text-slate-800">72 HP</span>
+                    </div>
+                    <div className="flex items-center justify-between p-1.5 border border-slate-100 rounded">
+                      <span className="text-slate-500">05. CARBON-DAEMON</span>
+                      <span className="font-bold text-rose-600">08 HP</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="text-[7px] text-slate-400 font-bold uppercase text-center mt-2 border-t border-slate-200 pt-1">
+                  RANKING UPDATE: REAL-TIME
                 </div>
               </div>
 
@@ -1725,9 +2175,9 @@ export default function Home() {
               <div className="flex-1 border-4 border-black bg-white rounded-lg shadow-[4px_4px_0px_rgba(0,0,0,1)] overflow-hidden relative flex flex-col min-h-[300px]">
                 
                 <div className="bg-slate-900 border-b-2 border-black p-2.5 font-mono text-[10px] text-white font-bold flex items-center justify-between">
-                  <span>PRIMARY FORWARD VIEWPORT // GLOBAL ECOLOGY OBSERVATION</span>
+                  <span>{simpleEnglish ? "LIVE WORLD VIEW // EARTH MAP" : "PRIMARY FORWARD VIEWPORT // GLOBAL ECOLOGY OBSERVATION"}</span>
                   <span className="bg-slate-950 px-2 py-0.5 text-[8px] text-slate-400 border border-slate-800 rounded font-normal">
-                    ORBITAL_CAM_A
+                    {simpleEnglish ? "CAMERA 1" : "ORBITAL_CAM_A"}
                   </span>
                 </div>
                 
@@ -1768,12 +2218,22 @@ export default function Home() {
                       </svg>
                     </div>
                     <div className="flex-1 font-mono text-[9px] text-slate-800 leading-tight">
-                      <div className="font-bold uppercase text-slate-400 mb-0.5">ECO_CHAN_HOLO</div>
-                      {user.score >= 75 
-                        ? "Grid stabilized! Outstanding performance. Let's keep it clean, Pilot!" 
-                        : user.score >= 50 
-                        ? "Reactor temperature is oscillating. Log daily clean actions!" 
-                        : "WARNING: High greenhouse levels detected! Red Alert!"}
+                      <div className="font-bold uppercase text-slate-400 mb-0.5">
+                        {simpleEnglish ? "ECO_CHAN_HELP" : "ECO_CHAN_HOLO"}
+                      </div>
+                      {simpleEnglish ? (
+                        user.score >= 75 
+                          ? "Earth is safe! Great job! Let's keep it clean!" 
+                          : user.score >= 50 
+                          ? "The temperature is changing. Add some green actions!" 
+                          : "Warning! Too much dirty air! Danger!"
+                      ) : (
+                        user.score >= 75 
+                          ? "Grid stabilized! Outstanding performance. Let's keep it clean, Pilot!" 
+                          : user.score >= 50 
+                          ? "Reactor temperature is oscillating. Log daily clean actions!" 
+                          : "WARNING: High greenhouse levels detected! Red Alert!"
+                      )}
                     </div>
                   </div>
 
@@ -1785,9 +2245,9 @@ export default function Home() {
                 <div className="mb-2.5 flex items-center justify-between border-b border-emerald-500/20 pb-1.5 font-mono text-[10px] text-emerald-400 font-bold">
                   <span className="flex items-center gap-1.5">
                     <span className={`h-2.5 w-2.5 rounded-full ${gameActive ? 'bg-emerald-500 animate-pulse shadow-[0_0_8px_#10b981]' : 'bg-rose-500'}`}></span>
-                    G.A.I.A. GRID INTERCEPTOR // DEFENSIVE ARCADE
+                    {simpleEnglish ? "DIRTY AIR STAR GAME // SAVE THE SKY" : "G.A.I.A. GRID INTERCEPTOR // DEFENSIVE ARCADE"}
                   </span>
-                  <span>SCORE: {gameScore}</span>
+                  <span>{simpleEnglish ? "SCORE: " : "SCORE: "}{gameScore}</span>
                 </div>
 
                 {/* Game viewport */}
@@ -1805,12 +2265,14 @@ export default function Home() {
                   
                   {!gameActive ? (
                     <div className="text-center p-3 z-10">
-                      <div className="text-[10px] font-mono font-bold text-slate-400 mb-2 uppercase tracking-wide">Defend Atmosphere From CO2 Particles</div>
+                      <div className="text-[10px] font-mono font-bold text-slate-400 mb-2 uppercase tracking-wide">
+                        {simpleEnglish ? "Block the dirty stars from hitting the ground!" : "Defend Atmosphere From CO2 Particles"}
+                      </div>
                       <button
                         onClick={() => { sounds.click(); setGameScore(0); setGameActive(true); }}
                         className="px-4 py-1.5 bg-emerald-600 hover:bg-emerald-500 border border-black font-mono font-bold text-xs text-white rounded shadow-[2px_2px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none"
                       >
-                        ACTIVATE COIL SHIELD
+                        {simpleEnglish ? "START GAME" : "ACTIVATE COIL SHIELD"}
                       </button>
                     </div>
                   ) : (
@@ -1841,13 +2303,13 @@ export default function Home() {
                 </div>
 
                 <div className="mt-2 flex items-center justify-between font-mono text-[8px] text-slate-500 font-bold uppercase">
-                  <span>CONTROL: SLIDE MOUSE OVER VIEWPORT</span>
+                  <span>{simpleEnglish ? "HOW TO PLAY: MOVE YOUR MOUSE LEFT & RIGHT" : "CONTROL: SLIDE MOUSE OVER VIEWPORT"}</span>
                   {gameActive && (
                     <button 
                       onClick={() => { sounds.click(); setGameActive(false); }}
                       className="text-red-400 hover:underline cursor-pointer"
                     >
-                      [DEACTIVATE]
+                      {simpleEnglish ? "[STOP]" : "[DEACTIVATE]"}
                     </button>
                   )}
                 </div>
@@ -1862,66 +2324,101 @@ export default function Home() {
                 <div>
                   <div className="border-b border-slate-200 pb-2 mb-3 font-mono font-extrabold text-[10px] text-slate-400 tracking-widest flex items-center gap-1.5">
                     <Zap className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
-                    EMISSION CONTROLLER MODULE
+                    {simpleEnglish ? "CHOOSE A GREEN DEED" : "EMISSION CONTROLLER MODULE"}
                   </div>
 
                   <div className="grid grid-cols-1 gap-2 overflow-y-auto max-h-[220px] pr-1">
                     <button
-                      onClick={(e) => logDailyAction('Took Metro', 5, 'Commuted via zero-emission metro rail grid', e)}
+                      onClick={(e) => logDailyAction(
+                        simpleEnglish ? 'Took Metro/Bus' : 'Took Metro', 
+                        5, 
+                        simpleEnglish ? 'Rode the train/bus instead of a gas car' : 'Commuted via zero-emission metro rail grid', 
+                        e
+                      )}
                       onMouseEnter={() => sounds.hover()}
                       className="p-2 bg-slate-50 hover:bg-slate-100 border-2 border-black rounded text-left font-mono group transition-all duration-75 shadow-[2px_2px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none flex items-center justify-between"
                     >
                       <div className="flex items-center gap-2">
                         <span className="text-sm">🚇</span>
-                        <span className="text-[9px] font-black group-hover:text-emerald-600 uppercase">Took Metro</span>
+                        <span className="text-[9px] font-black group-hover:text-emerald-600 uppercase">
+                          {simpleEnglish ? "Took Metro/Bus" : "Took Metro"}
+                        </span>
                       </div>
                       <span className="text-[9px] text-emerald-600 font-bold">+5 HP</span>
                     </button>
 
                     <button
-                      onClick={(e) => logDailyAction('Planted Tree', 8, 'Planted local sapling in neighborhood park', e)}
+                      onClick={(e) => logDailyAction(
+                        simpleEnglish ? 'Planted a Tree' : 'Planted Tree', 
+                        8, 
+                        simpleEnglish ? 'Planted a small green tree to clean the air' : 'Planted local sapling in neighborhood park', 
+                        e
+                      )}
                       onMouseEnter={() => sounds.hover()}
                       className="p-2 bg-slate-50 hover:bg-slate-100 border-2 border-black rounded text-left font-mono group transition-all duration-75 shadow-[2px_2px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none flex items-center justify-between"
                     >
                       <div className="flex items-center gap-2">
                         <span className="text-sm">🌲</span>
-                        <span className="text-[9px] font-black group-hover:text-emerald-600 uppercase">Planted Tree</span>
+                        <span className="text-[9px] font-black group-hover:text-emerald-600 uppercase">
+                          {simpleEnglish ? "Planted a Tree" : "Planted Tree"}
+                        </span>
                       </div>
                       <span className="text-[9px] text-emerald-600 font-bold">+8 HP</span>
                     </button>
 
                     <button
-                      onClick={(e) => logDailyAction('Ate Vegan Meal', 4, 'Had local plant-based organic meals', e)}
+                      onClick={(e) => logDailyAction(
+                        simpleEnglish ? 'Ate Veggies' : 'Ate Vegan Meal', 
+                        4, 
+                        simpleEnglish ? 'Ate organic plants instead of processed food' : 'Had local plant-based organic meals', 
+                        e
+                      )}
                       onMouseEnter={() => sounds.hover()}
                       className="p-2 bg-slate-50 hover:bg-slate-100 border-2 border-black rounded text-left font-mono group transition-all duration-75 shadow-[2px_2px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none flex items-center justify-between"
                     >
                       <div className="flex items-center gap-2">
                         <span className="text-sm">🥗</span>
-                        <span className="text-[9px] font-black group-hover:text-emerald-600 uppercase">Vegan Meal</span>
+                        <span className="text-[9px] font-black group-hover:text-emerald-600 uppercase">
+                          {simpleEnglish ? "Ate Veggies" : "Vegan Meal"}
+                        </span>
                       </div>
                       <span className="text-[9px] text-emerald-600 font-bold">+4 HP</span>
                     </button>
 
                     <button
-                      onClick={(e) => logDailyAction('Used Plastic', -5, 'Purchased and discarded single-use shopping bag', e)}
+                      onClick={(e) => logDailyAction(
+                        simpleEnglish ? 'Used Plastic' : 'Used Plastic', 
+                        -5, 
+                        simpleEnglish ? 'Bought plastic bag which makes trash' : 'Purchased and discarded single-use shopping bag', 
+                        e
+                      )}
                       onMouseEnter={() => sounds.hover()}
                       className="p-2 bg-rose-50 hover:bg-rose-100 border-2 border-black rounded text-left font-mono group transition-all duration-75 shadow-[2px_2px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none flex items-center justify-between"
                     >
                       <div className="flex items-center gap-2">
                         <span className="text-sm">🥤</span>
-                        <span className="text-[9px] font-black group-hover:text-rose-600 uppercase">Used Plastic</span>
+                        <span className="text-[9px] font-black group-hover:text-rose-600 uppercase">
+                          {simpleEnglish ? "Used Plastic" : "Used Plastic"}
+                        </span>
                       </div>
                       <span className="text-[9px] text-rose-600 font-bold">-5 HP</span>
                     </button>
 
                     <button
-                      onClick={(e) => logDailyAction('AC Left On', -8, 'Left cooling units active in unoccupied zones', e)}
+                      onClick={(e) => logDailyAction(
+                        simpleEnglish ? 'AC Left On' : 'AC Left On', 
+                        -8, 
+                        simpleEnglish ? 'Left the air conditioning on in empty rooms' : 'Left cooling units active in unoccupied zones', 
+                        e
+                      )}
                       onMouseEnter={() => sounds.hover()}
                       className="p-2 bg-rose-50 hover:bg-rose-100 border-2 border-black rounded text-left font-mono group transition-all duration-75 shadow-[2px_2px_0px_rgba(0,0,0,1)] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none flex items-center justify-between"
                     >
                       <div className="flex items-center gap-2">
                         <span className="text-sm">❄️</span>
-                        <span className="text-[9px] font-black group-hover:text-rose-600 uppercase">AC Left On</span>
+                        <span className="text-[9px] font-black group-hover:text-rose-600 uppercase">
+                          {simpleEnglish ? "AC Left On" : "AC Left On"}
+                        </span>
                       </div>
                       <span className="text-[9px] text-rose-600 font-bold">-8 HP</span>
                     </button>
@@ -1934,13 +2431,13 @@ export default function Home() {
                   <div>
                     <div className="border-b border-slate-200 pb-2 mb-2 font-mono font-extrabold text-[10px] text-slate-400 tracking-widest flex items-center gap-1.5">
                       <Terminal className="w-3.5 h-3.5" />
-                      GRID CHRONICLE LEDGER
+                      {simpleEnglish ? "YOUR GREEN ACTION HISTORY" : "GRID CHRONICLE LEDGER"}
                     </div>
 
                     <div className="bg-slate-50 border border-slate-200 rounded p-2.5 font-mono text-[9px] overflow-y-auto max-h-[160px]">
                       {actions.length === 0 ? (
                         <div className="h-full flex items-center justify-center text-slate-400 animate-pulse text-center uppercase">
-                          Awaiting local carbon ledger logs...
+                          {simpleEnglish ? "No actions logged yet. Press buttons above!" : "Awaiting local carbon ledger logs..."}
                         </div>
                       ) : (
                         <div className="space-y-2 text-slate-800">
@@ -1948,12 +2445,12 @@ export default function Home() {
                             <div key={act.id} className="border-b border-slate-200 pb-1.5 last:border-0">
                               <div className="flex items-center justify-between text-slate-400">
                                 <span>[{new Date(act.created_at).toLocaleTimeString()}]</span>
-                                <span className={act.score_change >= 0 ? 'text-emerald-600 font-bold' : 'text-rose-600 font-bold'}>
-                                  {act.score_change >= 0 ? '>> OK' : '>> DEFICIT'} ({act.score_change >= 0 ? `+${act.score_change}` : act.score_change} HP)
+                                <span className={act.score_change >= 0 ? 'text-emerald-600' : 'text-rose-600'}>
+                                  {simpleEnglish ? (act.score_change >= 0 ? '>> DONE' : '>> BAD') : (act.score_change >= 0 ? '>> OK' : '>> DEFICIT')} ({act.score_change >= 0 ? `+${act.score_change}` : act.score_change} HP)
                                 </span>
                               </div>
                               <div className="text-slate-700 pl-1 mt-0.5">
-                                Logged: <span className="text-black font-semibold">{act.action_type}</span> - {act.description}
+                                {simpleEnglish ? "Did:" : "Logged:"} <span className="text-black font-semibold">{act.action_type}</span> - {act.description}
                               </div>
                             </div>
                           ))}
@@ -1963,7 +2460,7 @@ export default function Home() {
                   </div>
 
                   <div className="text-[8px] text-slate-400 font-bold uppercase text-center mt-2 border-t border-slate-200 pt-1.5">
-                    SYS_CHRONICLE_LEDGER: SYNCED
+                    {simpleEnglish ? "HISTORY SYNCED" : "SYS_CHRONICLE_LEDGER: SYNCED"}
                   </div>
                 </div>
 

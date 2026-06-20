@@ -4,57 +4,56 @@ An editorial, Japanese corporate recruitment-style gamified Carbon Footprint Awa
 
 ---
 
-## 🌌 The Gamified World & Design Vibe
+## 🎯 Chosen Vertical: Carbon Footprint Awareness & Gamified Mitigation
 
-![G.A.I.A. Command Station Screen Mockup](https://raw.githubusercontent.com/username/repository/main/public/screenglow_mockup.png)
-
-The application takes inspiration from retro-futuristic industrial telemetry and mid-century corporate recruitment landing pages (such as the Gifu recruitment grids). It adopts a high-contrast console look featuring:
-*   **Heavy Black Borders & Monospace Typography**: Giving it a vintage JRPG terminal look.
-*   **CRT Scanline overlay**: Toggleable filter that adds scanning horizontal grid lines, vintage glass refresh loops, and flickering green matrix glow.
-*   **Procedural WebGL Planetary Projection**: A real-time, interactive 3D Earth rendering that reacts dynamically as you calibrate scopes.
+G.A.I.A. addresses the **Carbon Footprint Awareness** vertical by translating abstract environmental parameters into interactive, high-impact scrollytelling visual novels, a parametric simulator sandbox, and a real-time reactive arcade engine. 
 
 ---
 
-## ⚡ Main Core Features
+## 🧠 Approach and Logic
 
-1.  **11-Level Visual Novel Scrollytelling**:
-    *   Guided by **Eco-Chan** and 9 environmental specialists, users descend through the atmospheric layers (Scope 1, 2, 3, and 4) mapping carbon signatures, direct utility loads, base-load nuclear networks, cargo shipping values, acid monsoons, biological soil sinks, and the rising retention shield of **Carbon-Daemon**.
-    *   Controlled via frame-locked Anime.js scrolling parallax vector art.
+The application models carbon footprints across four ecological dimensions:
+1.  **Scope 1 (Direct Emissions)**: Modeled via direct fuel combustion calibration.
+2.  **Scope 2 (Utility Grid Load)**: Simulated through solar panel grids, wind turbine efficiency, and nuclear baseline networks.
+3.  **Scope 3 (Value Chain & Cargo)**: Represented via freight transportation logistics and material waste accumulation.
+4.  **Scope 4 (Biological Sinks)**: Simulated through organic soil diversion and forest canopy absorption rates.
 
-2.  **G.A.I.A. Grid Interceptor Retro Arcade Game**:
-    *   A playable real-time collision defensive mini-game built inside the center observer dashboard viewport.
-    *   Slide the electromagnetic coil filter shield with your mouse to catch falling red carbon soot particles (`☄️`) before they pierce atmospheric grid lines.
-    *   Successful catches trigger synthesizer sweeps. Misses leak carbon directly into the reactor, reducing shield HP core integrity in real-time.
-
-3.  **6-Axis Carbon Calibration Lab Matrix**:
-    *   An interactive parameter sandbox allowing users to dynamically adjust clean parameters (Solar grid infrastructure, Wind turbine deployment, Atomic baseline power, Organic compost diversion, Forest canopy sinks, and Green Hydrogen fuel transport).
-    *   Stability indexes and atmospheric anomalies are dynamically calculated with reactive live feedback from Uranium-Onee-san and H2-Senpai.
-
-4.  **8-Bit Retro Synthesizer Sound Engine**:
-    *   Custom-coded Web Audio API synth engine generating real-time sine, triangle, and sawtooth oscillator tones.
-    *   Interactive sounds include interface boot sweeps, button hovers, positive action chimes, negative load warning buzzes, and visual novel questionnaire completion fanfares.
-
-5.  **Character Archives Profile Deck**:
-    *   An interactive archive containing detailed bios, quotes, and modifier nodes to switch vector facial expressions dynamically (`[HAPPY]`, `[CONCERNED]`, `[NEUTRAL]`) with responsive scale-tilt hover animations.
-
-6.  **CRT Monitor Display Toggle**:
-    *   Instant overlay switcher adding scanning horizontal grid lines, vintage glass refresh loops, and flickering green terminal glowing matrices.
+As users scroll or calibrate inputs:
+*   An **Ecosystem Stability Score (0-100)** is dynamically recomputed.
+*   The **Atmospheric Anomaly Index (+°C)** adjusts dynamically based on the ratio of clean energy vs fossil utility loads.
+*   Visual styles shift reactively (e.g., vibrant green forests and bright blue skies degrade into toxic smog and pink acid rain).
 
 ---
 
-## 🚀 The "Clean Browser" Test Guaranteed
+## ⚙️ How the Solution Works
 
-*   **Zero Credentials / Key Leaks**: The system uses a clean local storage mock database layer to load and log actions completely client-side. No Supabase or database connections are required, guaranteeing it runs perfectly in private incognito sessions with zero environment variables required.
-*   **Pure Client Execution**: Built with static Next.js compilation parameters for superfast page loads, high SEO compatibility, and low performance overhead.
+*   **Interactive Visual Novel Scrollytelling**:
+    *   Features an 11-stage chronological path mapping ecological parameters under guide characters (**Eco-Chan**, **Ray**, **Aero-Kun**, **Uranium-Onee-san**, **H2-Senpai**, and **Biomass-Obaasan**).
+    *   Parallax animation matrices are governed by **Anime.js** tracking mouse scrolls, dynamically moving svg elements.
+*   **Reactive 3D Telemetry Grid**:
+    *   Procedural WebGL map mapping generated onto atoon-shaded canvas sphere via **Three.js**, rotating and bobbing reactively to indicate real-time simulation updates.
+*   **Parametric Calibration Lab Console**:
+    *   A 6-axis parameter sandbox where users adjust inputs (Wind, Solar, Compost, Canopy, Hydrogen, and Nuclear). Calibrating values prompts custom-synthesized warning signals or success Sweeps depending on threshold configurations.
+*   **Playable Retro Arcade (G.A.I.A. Interceptor Grid)**:
+    *   A collision-defensive minigame rendering soot particles (`☄️`) falling in real-time. Slide the electromagnetic filter shield using mouse movements to catch them and prevent shield integrity failures.
+*   **Client-Side Persistence Layer**:
+    *   Mapped via [src/lib/supabase.ts](file:///src/lib/supabase.ts) using `localStorage` to save carbon action logs client-side. Bypasses external servers for 100% database availability.
+
+---
+
+## 📌 Assumptions Made
+
+1.  **100% Client-Side Capabilities**: Assumes database storage should be client-bound (localStorage) to pass security audits and run seamlessly in private incognito windows.
+2.  **Browser Sound Synthesizer Support**: Assumes browser environment supports the standard `Web Audio API` (initialized on click/volume unmute to respect modern autoplay blocks).
+3.  **Standard Screen Resolution**: Assumes fluid grid columns are responsive from 320px mobile displays up to ultra-wide 4K monitors.
 
 ---
 
 ## ♿ Accessibility (A11y) & SEO Compliance
 
-*   **Aria Attributes**: All interactive elements (sliders, volume buttons, reset keys, game controllers) are outfitted with descriptive `aria-label` tags.
-*   **Screen Reader Friendly**: Visual novel SVGs include `role="img"`, `<title>`, and descriptions for screen reader parsers.
-*   **Semantic Layout**: Built using proper semantic elements (`<header>`, `<nav>`, `<main>`, `<section>`, `<footer`>) rather than plain layout wrappers.
-*   **SEO Tags**: Single-page heading layout with logical `<h1>`, `<h2>`, and `<h3>` tags mapping standard outline structures.
+*   **Aria Attributes**: All ranges, volume keys, CRT overlay buttons, and dashboard parameters possess unique descriptive `aria-label` tags.
+*   **Screen Reader SVG Support**: Vector groups have descriptive captions and `role="img"` attributes.
+*   **Structure Outline**: Heading maps are configured chronologically (`<h1>` -> `<h2>` -> `<h3>`).
 
 ---
 
@@ -95,18 +94,15 @@ carbon-footprint/
     git clone https://github.com/your-username/carbon-footprint.git
     cd carbon-footprint
     ```
-
 2.  Install dependencies:
     ```bash
     npm install
     ```
-
 3.  Boot the local server:
     ```bash
     npm run dev
     ```
     *For Windows environments, double-click `start_local.bat` for automatic port resolution.*
-
 4.  Build production bundle (verification check):
     ```bash
     npm run build
